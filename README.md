@@ -32,12 +32,4 @@ npm install
 # or
 yarn install
 
----
-## 🌱 Environment Variables
-
-This project uses Expo's [environment variables system](https://docs.expo.dev/guides/environment-variables/) to configure the API URL.
-
-1. Create a `.env.local` file in the project root:
 ```bash
-touch .env.local
-

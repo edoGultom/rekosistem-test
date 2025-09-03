@@ -1,75 +1,195 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import { ErrorMessage } from '@/components/ErrorMessage';
+import { LoadingSpinner } from '@/components/LoadingSpinner';
+import { PokemonCard } from '@/components/PokemonCard';
+import { SearchBar } from '@/components/SearchBar';
+import { usePokemonStore } from '@/store/pokemonStore';
+import { Pokemon } from '@/types/pokemon';
+import { router } from 'expo-router';
+import { Wifi, WifiOff } from 'lucide-react-native';
+import React, { useEffect } from 'react';
+import { FlatList, RefreshControl, StyleSheet, Text, View } from 'react-native';
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+export default function PokemonListScreen() {
+  const {
+    pokemon,
+    loading,
+    error,
+    isOffline,
+    hasNextPage,
+    loadPokemon,
+    clearError,
+    searchPokemon,
+  } = usePokemonStore();
 
-export default function HomeScreen() {
+  useEffect(() => {
+    if (pokemon.length === 0) {
+      loadPokemon(0);
+    }
+  }, [loadPokemon, pokemon.length]);
+
+  const handleRefresh = () => {
+    clearError();
+    loadPokemon(0);
+  };
+
+  const handleLoadMore = () => {
+    if (!loading && hasNextPage) {
+      const nextPage = Math.floor(pokemon.length / 20);
+      loadPokemon(nextPage);
+    }
+  };
+
+  const handlePokemonPress = (selectedPokemon: Pokemon) => {
+    router.push({
+      pathname: '/pokemon/[id]',
+      params: { id: selectedPokemon.id.toString() },
+    });
+  };
+
+  const handleSearch = (query: string) => {
+    searchPokemon(query);
+  };
+
+  if (loading && pokemon.length === 0) {
+    return <LoadingSpinner message="Loading Pokémon..." />;
+  }
+
+  if (error && pokemon.length === 0) {
+    return <ErrorMessage message={error} onRetry={handleRefresh} />;
+  }
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <View style={styles.container}>
+      {/* Header */}
+      <View style={styles.header}>
+        <Text style={styles.title}>Pokémon</Text>
+        <View style={styles.statusContainer}>
+          {isOffline ? (
+            <View style={styles.offlineIndicator}>
+              <WifiOff size={16} color="#EF4444" />
+              <Text style={styles.offlineText}>Offline</Text>
+            </View>
+          ) : (
+            <View style={styles.onlineIndicator}>
+              <Wifi size={16} color="#10B981" />
+              <Text style={styles.onlineText}>Online</Text>
+            </View>
+          )}
+        </View>
+      </View>
+
+      {/* Search */}
+      <SearchBar onSearch={handleSearch} />
+
+      {/* Pokemon List */}
+      <FlatList
+        data={pokemon}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <PokemonCard pokemon={item} onPress={handlePokemonPress} />
+        )}
+        numColumns={2}
+        contentContainerStyle={styles.listContent}
+        onEndReached={handleLoadMore}
+        onEndReachedThreshold={0.5}
+        refreshControl={
+          <RefreshControl refreshing={loading} onRefresh={handleRefresh} />
+        }
+        ListFooterComponent={() => {
+          if (loading && pokemon.length > 0) {
+            return (
+              <View style={styles.loadingFooter}>
+                <LoadingSpinner size="small" message="Loading more..." />
+              </View>
+            );
+          }
+          return null;
+        }}
+        ListEmptyComponent={() => (
+          <View style={styles.emptyContainer}>
+            <Text style={styles.emptyText}>No Pokémon found</Text>
+            <Text style={styles.emptySubtext}>Try searching for a different Pokémon</Text>
+          </View>
+        )}
+      />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
+  container: {
+    flex: 1,
+    backgroundColor: '#F9FAFB',
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingTop: 60,
+    paddingBottom: 16,
+    backgroundColor: '#FFFFFF',
+    borderBottomWidth: 1,
+    borderBottomColor: '#E5E7EB',
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#1F2937',
+  },
+  statusContainer: {
+    alignItems: 'flex-end',
+  },
+  offlineIndicator: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    backgroundColor: '#FEF2F2',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 8,
   },
-  stepContainer: {
-    gap: 8,
+  offlineText: {
+    marginLeft: 4,
+    fontSize: 12,
+    color: '#EF4444',
+    fontWeight: '600',
+  },
+  onlineIndicator: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#ECFDF5',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 8,
+  },
+  onlineText: {
+    marginLeft: 4,
+    fontSize: 12,
+    color: '#10B981',
+    fontWeight: '600',
+  },
+  listContent: {
+    padding: 8,
+  },
+  loadingFooter: {
+    padding: 20,
+  },
+  emptyContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 40,
+  },
+  emptyText: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#1F2937',
     marginBottom: 8,
+    textAlign: 'center',
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  emptySubtext: {
+    fontSize: 14,
+    color: '#6B7280',
+    textAlign: 'center',
   },
 });

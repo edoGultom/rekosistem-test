@@ -32,4 +32,8 @@ npm install
 # or
 yarn install
 
-```bash
+```markdown
+### 2. Configure Environment Variables
+Buat file `.env` di root project:
+
+```env

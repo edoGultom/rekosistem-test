@@ -26,7 +26,7 @@ A **cross-platform Pokédex app** built with **Expo**, **React Native**, and **T
 
 ## 🚀 Getting Started
 
-### 1. Install dependencies
+### 1. Clone the repository
 ```bash
 git clone https://github.com/edoGultom/rekosistem-test
 cd rekosistem-test

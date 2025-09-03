@@ -1,8 +1,8 @@
 # Expo Pokédex (React Native + TypeScript)
 
-[![Expo](https://img.shields.io/badge/Expo-49.0.0-000.svg?logo=expo)](https://expo.dev/)
+[![Expo](https://img.shields.io/badge/Expo-53.0.22-000.svg?logo=expo)](https://expo.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6.svg?logo=typescript)](https://www.typescriptlang.org/)
-[![React Native](https://img.shields.io/badge/React%20Native-0.74-61DAFB.svg?logo=react)](https://reactnative.dev/)
+[![React Native](https://img.shields.io/badge/React%20Native-0.79-61DAFB.svg?logo=react)](https://reactnative.dev/)
 [![Zustand](https://img.shields.io/badge/Zustand-Store-ffdd55.svg)](https://github.com/pmndrs/zustand)
 [![Jest](https://img.shields.io/badge/Tested_with-Jest-15C213.svg?logo=jest)](https://jestjs.io/)
 

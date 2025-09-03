@@ -28,10 +28,10 @@ A **cross-platform Pokédex app** built with **Expo**, **React Native**, and **T
 
 ### 1. Install dependencies
 ```bash
-npm install
-# or
-yarn install
+git clone https://github.com/edoGultom/rekosistem-test
+cd rekosistem-test
+cp .env.example .env
 
 ```
 ### 2. Configure Environment Variables
-Buat file `.env` di root project:
+Create a `.env.local` file in the project root

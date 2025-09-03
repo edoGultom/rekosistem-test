@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import { pokemonApi } from '@/services/api';
 import { storageService } from '@/services/storage';
 import { AppState, FavoritePokemon, Pokemon, PokemonDetail, SyncAction } from '@/types/pokemon';

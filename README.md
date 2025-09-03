@@ -1,50 +1,43 @@
-# Welcome to your Expo app 👋
+# Expo Pokédex (React Native + TypeScript)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+[![Expo](https://img.shields.io/badge/Expo-49.0.0-000.svg?logo=expo)](https://expo.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6.svg?logo=typescript)](https://www.typescriptlang.org/)
+[![React Native](https://img.shields.io/badge/React%20Native-0.74-61DAFB.svg?logo=react)](https://reactnative.dev/)
+[![Zustand](https://img.shields.io/badge/Zustand-Store-ffdd55.svg)](https://github.com/pmndrs/zustand)
+[![Jest](https://img.shields.io/badge/Tested_with-Jest-15C213.svg?logo=jest)](https://jestjs.io/)
 
-## Get started
+A **cross-platform Pokédex app** built with **Expo**, **React Native**, and **TypeScript** that runs on **Android, iOS, and Web**.
 
-1. Install dependencies
+---
 
-   ```bash
-   npm install
-   ```
+## ✨ Features
 
-2. Start the app
+- **PokéAPI Integration** – Paginated list of Pokémon (name + image)
+- **Detail Screen** – View Pokémon name, types, abilities, and image
+- **Favorites Management** – Add/remove favorites, available offline
+- **Offline-First** – Favorites stored in AsyncStorage and synced when online
+- **Bottom Tabs Navigation** – Pokédex list + Favorites screen
+- **State Management with Zustand** – Lightweight store with persistence
+- **API Handling with Axios** – Clean API abstraction layer
+- **Testing with Jest** – Unit tests for API and store logic
+- **Cross-platform** – Android, iOS, Web via Expo
 
-   ```bash
-   npx expo start
-   ```
+---
 
-In the output, you'll find options to open the app in a
+## 🚀 Getting Started
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
+### 1. Install dependencies
 ```bash
-npm run reset-project
-```
+npm install
+# or
+yarn install
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
+## 🌱 Environment Variables
 
-## Learn more
+This project uses Expo's [environment variables system](https://docs.expo.dev/guides/environment-variables/) to configure the API URL.
 
-To learn more about developing your project with Expo, look at the following resources:
+1. Create a `.env.local` file in the project root:
+```bash
+touch .env.local
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.

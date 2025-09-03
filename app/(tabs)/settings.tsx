@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import { storageService } from '@/services/storage';
 import { usePokemonStore } from '@/store/pokemonStore';
 import { Database, Info, Trash2, Wifi } from 'lucide-react-native';

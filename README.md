@@ -51,8 +51,6 @@ npm run dev
 ### 5. Run tests
 ```bash
 npm test
-# or
-yarn test
 ```
 
 

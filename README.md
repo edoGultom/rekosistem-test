@@ -16,7 +16,7 @@ A **cross-platform Pokédex app** built with **Expo**, **React Native**, and **T
 - **Detail Screen** – View Pokémon name, types, abilities, and image
 - **Favorites Management** – Add/remove favorites, available offline
 - **Offline-First** – Favorites stored in AsyncStorage and synced when online
-- **Bottom Tabs Navigation** – Pokédex list + Favorites screen
+- **Bottom Tabs Navigation** – Pokédex list + Favorites screen + Settings Screen
 - **State Management with Zustand** – Lightweight store with persistence
 - **API Handling with Axios** – Clean API abstraction layer
 - **Testing with Jest** – Unit tests for API and store logic

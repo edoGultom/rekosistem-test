@@ -16,7 +16,8 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.edo10395.rekosistemtechnicaltest"
     },
     "web": {
       "bundler": "metro",
@@ -34,11 +35,17 @@
           "backgroundColor": "#ffffff"
         }
       ],
-       "expo-font", 
+      "expo-font",
       "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "83c04b36-76cc-43bc-bca2-93ad23227c6c"
+      }
     }
   }
 }

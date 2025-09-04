@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 import { storageService } from '@/services/storage';
 import { usePokemonStore } from '@/store/pokemonStore';
 import { Database, Info, Trash2, Wifi } from 'lucide-react-native';
@@ -41,12 +40,12 @@ export default function SettingsScreen() {
   };
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
         <Text style={styles.title}>Settings</Text>
       </View>
-
+      <ScrollView>
       {/* App Info */}
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>App Information</Text>
@@ -124,7 +123,8 @@ export default function SettingsScreen() {
           <Text style={styles.featureItem}>• Cached Pokémon details</Text>
         </View>
       </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 }
 

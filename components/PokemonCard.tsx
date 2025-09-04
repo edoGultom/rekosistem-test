@@ -36,6 +36,7 @@ export function PokemonCard({ pokemon, onPress }: PokemonCardProps) {
           style={styles.favoriteButton}
           onPress={handleFavoritePress}
           activeOpacity={0.7}
+          testID="favorite-button"
         >
           <Heart
             size={20}

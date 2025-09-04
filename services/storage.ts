@@ -13,7 +13,7 @@ export const storageService = {
       const favorites = await AsyncStorage.getItem(KEYS.FAVORITES);
       return favorites ? JSON.parse(favorites) : [];
     } catch (error) {
-      console.error('Error getting favorites from storage:', error);
+      console.log('Error getting favorites from storage:', error);
       return [];
     }
   },
@@ -22,7 +22,7 @@ export const storageService = {
     try {
       await AsyncStorage.setItem(KEYS.FAVORITES, JSON.stringify(favorites));
     } catch (error) {
-      console.error('Error saving favorites to storage:', error);
+      console.log('Error saving favorites to storage:', error);
     }
   },
 
@@ -31,7 +31,7 @@ export const storageService = {
       const queue = await AsyncStorage.getItem(KEYS.SYNC_QUEUE);
       return queue ? JSON.parse(queue) : [];
     } catch (error) {
-      console.error('Error getting sync queue from storage:', error);
+      console.log('Error getting sync queue from storage:', error);
       return [];
     }
   },
@@ -40,7 +40,7 @@ export const storageService = {
     try {
       await AsyncStorage.setItem(KEYS.SYNC_QUEUE, JSON.stringify(queue));
     } catch (error) {
-      console.error('Error saving sync queue to storage:', error);
+      console.log('Error saving sync queue to storage:', error);
     }
   },
 
@@ -48,7 +48,7 @@ export const storageService = {
     try {
       await AsyncStorage.removeItem(KEYS.SYNC_QUEUE);
     } catch (error) {
-      console.error('Error clearing sync queue:', error);
+      console.log('Error clearing sync queue:', error);
     }
   },
 
@@ -60,7 +60,7 @@ export const storageService = {
         timestamp: Date.now()
       }));
     } catch (error) {
-      console.error('Error caching Pokemon data:', error);
+      console.log('Error caching Pokemon data:', error);
     }
   },
 
@@ -80,7 +80,7 @@ export const storageService = {
       
       return null;
     } catch (error) {
-      console.error('Error getting cached Pokemon data:', error);
+      console.log('Error getting cached Pokemon data:', error);
       return null;
     }
   }

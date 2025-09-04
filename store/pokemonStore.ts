@@ -1,4 +1,4 @@
-/* eslint-disable import/no-unresolved */
+ 
 import { pokemonApi } from '@/services/api';
 import { storageService } from '@/services/storage';
 import { AppState, FavoritePokemon, Pokemon, PokemonDetail, SyncAction } from '@/types/pokemon';
@@ -69,7 +69,7 @@ export const usePokemonStore = create<PokemonStore>()(
         }));
 
       } catch (error) {
-        console.error('Error loading Pokemon:', error);
+        console.log('Error loading Pokemon:', error);
         set({
           error: error instanceof Error ? error.message : 'Failed to load Pokemon',
           loading: false
@@ -106,7 +106,7 @@ export const usePokemonStore = create<PokemonStore>()(
         }));
 
       } catch (error) {
-        console.error(`Error loading Pokemon detail ${id}:`, error);
+        console.log(`Error loading Pokemon detail ${id}:`, error);
         set({
           error: error instanceof Error ? error.message : 'Failed to load Pokemon details'
         });
@@ -214,14 +214,14 @@ export const usePokemonStore = create<PokemonStore>()(
 
       try {
         // Process sync queue (in a real app, you might want to sync with a backend)
-        console.log('Syncing queued actions:', state.syncQueue);
+        // console.log('Syncing queued actions:', state.syncQueue);
         
         // Clear the sync queue after successful sync
         await storageService.clearSyncQueue();
         set({ syncQueue: [] });
         
       } catch (error) {
-        console.error('Error syncing data:', error);
+        console.log('Error syncing data:', error);
       }
     },
 
@@ -237,7 +237,7 @@ export const usePokemonStore = create<PokemonStore>()(
           syncQueue
         });
       } catch (error) {
-        console.error('Error loading offline data:', error);
+        console.log('Error loading offline data:', error);
       }
     },
 
@@ -271,7 +271,7 @@ export const usePokemonStore = create<PokemonStore>()(
           hasNextPage: false
         });
       } catch (error) {
-        console.error('Error searching Pokemon:', error);
+        console.log('Error searching Pokemon:', error);
         set({
           error: 'Failed to search Pokemon',
           loading: false

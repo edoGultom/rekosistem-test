@@ -1,7 +1,8 @@
 import { PokemonDetail, PokemonListResponse } from '@/types/pokemon';
 import axios from 'axios';
 
-const BASE_URL = process.env.EXPO_PUBLIC_API_URL;
+// const BASE_URL = process.env.EXPO_PUBLIC_API_URL;
+const BASE_URL = 'https://pokeapi.co/api/v2';
 const LIMIT = 20;
 
 export const api = axios.create({
@@ -27,7 +28,7 @@ api.interceptors.response.use(
     return response;
   },
   (error) => {
-    console.error('API Error:', error.response?.data || error.message);
+    console.log('API Error:', error.response?.data || error.message);
     return Promise.reject(error);
   }
 );
@@ -49,7 +50,7 @@ export const pokemonApi = {
         results: pokemonWithImages
       };
     } catch (error) {
-      console.error('Error fetching Pokemon list:', error);
+      console.log('Error fetching Pokemon list:', error);
       throw error;
     }
   },
@@ -59,7 +60,7 @@ export const pokemonApi = {
       const response = await api.get(`/pokemon/${search}`);
       return response.data;
     } catch (error) {
-      console.error(`Error fetching Pokemon detail for ID ${search}:`, error);
+      console.log(`Error fetching Pokemon detail for ID ${search}:`, error);
       throw error;
     }
   },
@@ -79,7 +80,7 @@ export const pokemonApi = {
       
       return searchResults;
     } catch (error) {
-      console.error('Error searching Pokemon:', error);
+      console.log('Error searching Pokemon:', error);
       throw error;
     }
   }

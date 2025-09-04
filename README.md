@@ -30,11 +30,12 @@ A **cross-platform Pokédex app** built with **Expo**, **React Native**, and **T
 ```bash
 git clone https://github.com/edoGultom/rekosistem-test
 cd rekosistem-test
-cp .env.example .env
 ```
 
 ### 2. Configure Environment Variables
-Create a `.env.local` file in the project root
+```bash
+cp .env.example .env.local
+```
 
 ### 3. Install dependencies
 ```bash

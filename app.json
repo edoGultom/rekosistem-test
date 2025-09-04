@@ -20,7 +20,7 @@
       "package": "com.edo10395.rekosistemtechnicaltest"
     },
     "web": {
-      "bundler": "metro",
+      "bundler": "webpack",
       "output": "single",
       "favicon": "./assets/images/favicon.png"
     },
